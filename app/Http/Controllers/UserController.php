@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
+use App\Models\User;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -14,7 +18,8 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        return;
+        $perPage = $request->input('perPage') ?: $request->input('per_page') ?: $request->input('per-page') ?: 5;
+        return UserResource::collection(User::paginate($perPage));
     }
 
     /**
@@ -26,7 +31,19 @@ class UserController extends Controller
      */
     public function view(Request $request, $id)
     {
-        return;
+        $this->getValidationFactory()->make(
+            [
+                'id' => $id,
+            ],
+            [
+                'id' => 'exists:users',
+            ],
+            [],
+            [
+                'id' => 'User ID',
+            ]
+        )->validate();
+        return UserResource::make(User::find($id));
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateUsersPhonenumbersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('users')) {
+        if (Schema::hasTable('users_phonenumbers')) {
             return;
-        }
-        Schema::create('users', function (Blueprint $table) {
+        }        
+        Schema::create('users_phonenumbers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('email');
-            $table->timestamp('dateOfBirth');
-            $table->boolean('isActive')->default(0);
+            $table->unsignedTinyInteger('user_id')->index()->comment('ID in users');
+            $table->string('phone_number')->comment('User has phone number');            
             $table->timestamps();
         });
     }
@@ -33,6 +31,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('users_phonenumbers');
     }
 }

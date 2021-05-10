@@ -15,10 +15,10 @@ use App\Http\Controllers\UserController;
 */
 Route::get('/users',                                    [UserController::class, 'index']);
 Route::post('/user',                                    [UserController::class, 'create']);
-Route::prefix('users')->group(
+Route::prefix('/users')->group(
     function () {
-        Route::get('{id}',                              [UserController::class, 'view']);
-        Route::delete('{id}',                           [UserController::class, 'delete']);
+        Route::get('/{id}',                              [UserController::class, 'view']);
+        Route::delete('/{id}',                           [UserController::class, 'delete']);
 
         Route::get('/phone-numbers',                    [PhoneNumberController::class, 'index']);
         Route::post('/phone-numbers',                   [PhoneNumberController::class, 'create']);

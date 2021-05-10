@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PhoneNumber;
+use App\Http\Resources\PhoneNumberResource;
 
 class PhoneNumberController extends Controller
 {
@@ -14,7 +16,8 @@ class PhoneNumberController extends Controller
      */
     public function index(Request $request)
     {
-        return;
+        $perPage = $request->input('perPage') ?: $request->input('per_page') ?: $request->input('per-page') ?: 5;
+        return PhoneNumberResource::collection(PhoneNumber::paginate($perPage));
     }
 
     /**
