@@ -14,10 +14,11 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get('/users',                                    [UserController::class, 'index']);
-Route::post('/user',                                    [UserController::class, 'create']);
+Route::post('/users',                                    [UserController::class, 'create']);
 Route::prefix('/users')->group(
     function () {
         Route::get('/{id}',                              [UserController::class, 'view']);
+        Route::put('/{id}',                              [UserController::class, 'update']);
         Route::delete('/{id}',                           [UserController::class, 'delete']);
 
         Route::get('/phone-numbers',                    [PhoneNumberController::class, 'index']);

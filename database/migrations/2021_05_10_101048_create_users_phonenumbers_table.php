@@ -13,13 +13,14 @@ class CreateUsersPhonenumbersTable extends Migration
      */
     public function up()
     {
-        if (Schema::hasTable('users_phonenumbers')) {
+        if (Schema::hasTable('phone_numbers')) {
             return;
         }        
-        Schema::create('users_phonenumbers', function (Blueprint $table) {
+        Schema::create('phone_numbers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedTinyInteger('user_id')->index()->comment('ID in users');
-            $table->string('phone_number')->comment('User has phone number');            
+            $table->string('phoneNumber')->comment('User has phone number');
+            $table->boolean('isDefault')->default(0);
             $table->timestamps();
         });
     }
@@ -31,6 +32,6 @@ class CreateUsersPhonenumbersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users_phonenumbers');
+        Schema::dropIfExists('phone_numbers');
     }
 }

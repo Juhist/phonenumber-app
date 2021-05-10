@@ -24,9 +24,10 @@ class DatabaseSeeder extends Seeder
             'name' => rand(0,1)
         ]);
 
-        $userId = DB::table('users_phonenumbers')->insertGetId([
+        $userId = DB::table('phone_numbers')->insertGetId([
             'user_id' => $userId,
-            'phone_number' => '+3630' . rand(1000000, 9999999),
+            'phoneNumber' => '+3630' . rand(1000000, 9999999),
+            'isDefault' => 1,
             'created_at' => Carbon::now(),
         ]);        
     }
