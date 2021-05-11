@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PhoneNumberController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,20 +15,21 @@ use App\Http\Controllers\UserController;
 |
 */
 Route::get('/users',                                    [UserController::class, 'index']);
-Route::post('/users',                                    [UserController::class, 'create']);
+Route::post('/users',                                   [UserController::class, 'create']);
 Route::prefix('/users')->group(
     function () {
-        Route::get('/{id}',                              [UserController::class, 'view']);
-        Route::put('/{id}',                              [UserController::class, 'update']);
-        Route::delete('/{id}',                           [UserController::class, 'delete']);
 
         Route::get('/phone-numbers',                    [PhoneNumberController::class, 'index']);
         Route::post('/phone-numbers',                   [PhoneNumberController::class, 'create']);
         Route::prefix('phone-numbers')->group(
             function () {
                 Route::get('{id}',                      [PhoneNumberController::class, 'view']);
+                Route::put('/{id}',                     [PhoneNumberController::class, 'update']);
                 Route::delete('{id}',                   [PhoneNumberController::class, 'delete']);
             }
-        );        
+        );          
+        Route::get('/{id}',                             [UserController::class, 'view']);
+        Route::put('/{id}',                             [UserController::class, 'update']);
+        Route::delete('/{id}',                          [UserController::class, 'delete']);
     }
 ); 
