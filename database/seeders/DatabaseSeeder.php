@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
                 'email' => Str::random(10) . '@example.com',
                 'dateOfBirth' =>  Carbon::create(rand(1980,2012), rand(1,12), rand(1,28)),
                 'created_at' => Carbon::now(),
-                'name' => rand(0,1)
+                'isActive' => rand(0,1)
                 ]);
                 
                 DB::table('phone_numbers')->insert([

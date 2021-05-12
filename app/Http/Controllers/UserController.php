@@ -37,7 +37,7 @@ class UserController extends Controller
                 'id' => $id,
             ],
             [
-                'id' => 'exists:users',
+                'id' => 'required|exists:users',
             ],
         )->validate();
         return UserResource::make(User::find($id));

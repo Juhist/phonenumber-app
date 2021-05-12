@@ -36,7 +36,7 @@ class PhoneNumberController extends Controller
                 'id' => $id,
             ],
             [
-                'id' => 'exists:phone_numbers',
+                'id' => 'required|exists:phone_numbers',
             ],
         )->validate();
         return PhoneNumberResource::make(PhoneNumber::find($id));
