@@ -1,0 +1,23 @@
+# For more information: https://laravel.com/docs/sail
+version: '3'
+services:
+    pgsql:
+        image: 'postgres:13'
+        container_name: "some-postgres"
+        ports:
+            - '${FORWARD_DB_PORT:-5432}:5432'
+        environment:
+            PGPASSWORD: '${DB_PASSWORD:-secret}'
+            POSTGRES_DB: '${DB_DATABASE}'
+            POSTGRES_USER: '${DB_USERNAME}'
+            POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
+        volumes:
+            - 'sailpgsql:/var/lib/postgresql/data'
+        networks:
+            - sail
+networks:
+    sail:
+        driver: bridge
+volumes:
+    sailpgsql:
+        driver: local

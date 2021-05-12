@@ -1,0 +1,27 @@
+version: '2'
+services:
+  app:
+    build: .
+    ports:
+      - "8009:8000"
+    volumes:
+      - .:/app
+    env_file: .env
+    working_dir: /app
+    command: bash -c 'php artisan migrate && php artisan serve --host 0.0.0.0'
+    depends_on:
+      - db
+    links:
+      - db
+  # The Database
+  pgsql:
+    image: postgres:10.1
+    container_name: "some-postgres"
+    environment:
+      - 'DB_USER=${DB_USER}'
+      - 'DB_PASS=${DB_PASS}'
+    volumes:
+       - 'sailpgsql:/var/lib/postgresql/data'
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    restart: 'always'
