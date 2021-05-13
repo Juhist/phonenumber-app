@@ -10,15 +10,15 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Illuminate\Support\Facades\DB;
 
-class CreateUserMutation extends Mutation
+class CreatePhoneNumberMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'createUser'
+        'name' => 'createPhoneNumber'
     ];
 
     public function type(): Type
     {
-        return GraphQL::type('User');
+        return GraphQL::type('PhoneNumber');
     }
 
     public function args(): array

@@ -10,10 +10,10 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Illuminate\Support\Facades\DB;
 
-class CreateUserMutation extends Mutation
+class UpdateUserMutation extends Mutation
 {
     protected $attributes = [
-        'name' => 'createUser'
+        'name' => 'updateUser'
     ];
 
     public function type(): Type

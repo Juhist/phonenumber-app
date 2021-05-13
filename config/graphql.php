@@ -104,12 +104,20 @@ return [
             'query' => [
                 'user' => App\GraphQL\Queries\UserQuery::class,
                 'users' => App\GraphQL\Queries\UsersQuery::class,
+                'phoneNumber' => App\GraphQL\Queries\PhoneNumberQuery::class,
+                'phoneNumbers' => App\GraphQL\Queries\PhoneNumbersQuery::class,                
             ],
             'mutation' => [
                 'createUser' => App\GraphQL\Mutations\CreateUserMutation::class,
+                'updateUser' => App\GraphQL\Mutations\UpdateUserMutation::class,
+                'deleteUser' => App\GraphQL\Mutations\DeleteUserMutation::class,
+                'createPhoneNumber' => App\GraphQL\Mutations\CreatePhoneNumberMutation::class,
+                'updatePhoneNumber' => App\GraphQL\Mutations\UpdatePhoneNumberMutation::class,
+                'deletePhoneNumber' => App\GraphQL\Mutations\DeletePhoneNumberMutation::class,                
             ],
             'types' => [
                 'User' => App\GraphQL\Types\UserType::class,
+                'PhoneNumber' => App\GraphQL\Types\PhoneNumberType::class,
             ],
             'middleware' => [],
             'method' => ['get', 'post'],

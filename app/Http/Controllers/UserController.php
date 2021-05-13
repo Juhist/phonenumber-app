@@ -52,7 +52,7 @@ class UserController extends Controller
     public function create(Request $request)
     {
         $request->validate([
-            'name' => 'required|alpha',
+            'name' => 'required|string',
             'email' => 'required|email',
             'phoneNumber' => 'required|phone:HU',
             'dateOfBirth' => 'required|date_format:Y-m-d|before:today',

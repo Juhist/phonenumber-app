@@ -2,25 +2,20 @@
 
 namespace App\GraphQL\Queries;
 
-use App\Models\User;
+use App\Models\PhoneNumber;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use App\Http\Resources\UserResource;
-use Exception;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
-class UserQuery extends Query
+class PhoneNumberQuery extends Query
 {
     protected $attributes = [
-        'name' => 'user',
+        'name' => 'phoneNumber',
     ];
 
     public function type(): Type
     {
-        return GraphQL::type('User');
+        return GraphQL::type('PhoneNumber');
     }
 
     public function args(): array
@@ -29,13 +24,13 @@ class UserQuery extends Query
             'id' => [
                 'name' => 'id',
                 'type' => Type::int(),
-                'rules' => ['required','exists:users,id']
+                'rules' => ['required','exists:phone_numbers,id']
             ],
         ];
     }
 
     public function resolve($root, $args)
     {
-        return User::findOrFail($args['id']);
+        return PhoneNumber::findOrFail($args['id']);
     }
 }
