@@ -20,7 +20,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('perPage') ?: $request->input('per_page') ?: $request->input('per-page') ?: 5;
-        return UserResource::collection(User::paginate($perPage));
+        return UserResource::collection(User::with('phonenumbers')->paginate($perPage));
     }
 
     /**
@@ -40,7 +40,7 @@ class UserController extends Controller
                 'id' => 'required|exists:users',
             ],
         )->validate();
-        return UserResource::make(User::find($id));
+        return UserResource::make(User::with('phonenumbers')->find($id));
     }
 
     /**
@@ -98,7 +98,7 @@ class UserController extends Controller
             ],
             [
                 'id' => 'required|exists:users,id',
-                'name' => 'alpha',
+                'name' => 'string',
                 'email' => 'email',
                 'phoneNumber' => 'required|phone:HU',
                 'dateOfBirth' => 'date_format:Y-m-d|before:today',

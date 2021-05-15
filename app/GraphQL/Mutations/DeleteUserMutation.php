@@ -24,52 +24,26 @@ class DeleteUserMutation extends Mutation
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required', 'string']
-            ],
-            'email' => [
-                'name' => 'email',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','email']
-            ],
-            'phoneNumber' => [
-                'name' => 'phoneNumber',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','phone:HU']
-            ],
-            'birthOfDate' => [
-                'name' => 'birthOfDate',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','date_format:Y-m-d','before:today']
-            ],
-            'isActive' => [
-                'name' => 'isActive',
-                'type' =>  Type::nonNull(Type::boolean()),
-                'rules' => ['required']
-            ],
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int(),
+                'rules' => ['required', 'exists:users,id']
+            ], 
         ];
     }
 
     public function resolve($root, $args)
     {
         DB::beginTransaction();
-        if(!$user = User::create($args))
-        {
+        if (!PhoneNumber::where('user_id', $args['id'])->delete()) {
             DB::rollBack();
-            throw new Exception('Error in saving data.');
+            throw new Exception('Error in deleting data.');
         }
-        if(!PhoneNumber::create([
-            'user_id' => $user->id, 
-            'phoneNumber' => $args['phoneNumber'],
-            'isDefault' => 1,
-            ]))
-        {
+        if (!User::find($args['id'])->delete()) {
             DB::rollBack();
-            throw new Exception('Error in saving data.');
-        }        
+            throw new Exception('Error in deleting data.');
+        }
         DB::commit();
-        return $user;
+        return;
     }
 }

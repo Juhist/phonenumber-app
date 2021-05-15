@@ -40,4 +40,9 @@ class UserType extends GraphQLType
             ]                        
         ];
     }
+
+    public function phones(User $user)
+    {
+        $user->phonenumbers->get();
+    }
 }

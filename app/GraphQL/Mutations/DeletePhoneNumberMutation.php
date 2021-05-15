@@ -24,52 +24,23 @@ class DeletePhoneNumberMutation extends Mutation
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required', 'string']
-            ],
-            'email' => [
-                'name' => 'email',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','email']
-            ],
-            'phoneNumber' => [
-                'name' => 'phoneNumber',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','phone:HU']
-            ],
-            'birthOfDate' => [
-                'name' => 'birthOfDate',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','date_format:Y-m-d','before:today']
-            ],
-            'isActive' => [
-                'name' => 'isActive',
-                'type' =>  Type::nonNull(Type::boolean()),
-                'rules' => ['required']
-            ],
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int(),
+                'rules' => ['required', 'exists:phone_numbers,id']
+            ], 
         ];
     }
 
     public function resolve($root, $args)
     {
-        DB::beginTransaction();
-        if(!$user = User::create($args))
-        {
-            DB::rollBack();
-            throw new Exception('Error in saving data.');
+        $phone = PhoneNumber::find($args['id']);
+        if ($phone->isDefault) {
+            throw new Exception('Default phone number not delete.');
         }
-        if(!PhoneNumber::create([
-            'user_id' => $user->id, 
-            'phoneNumber' => $args['phoneNumber'],
-            'isDefault' => 1,
-            ]))
-        {
-            DB::rollBack();
-            throw new Exception('Error in saving data.');
-        }        
-        DB::commit();
-        return $user;
+        if (!$phone->delete()) {
+            throw new Exception('Error in deleting data.');
+        }
+        return;
     }
 }

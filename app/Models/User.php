@@ -13,4 +13,10 @@ class User extends Model
         'dateOfBirth',
         'isActive',
     ];
+
+    public function phonenumbers()
+    {
+        return $this->hasMany('App\Models\PhoneNumber');
+    }
+
 }

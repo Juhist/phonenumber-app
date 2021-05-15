@@ -39,8 +39,8 @@ class CreateUserMutation extends Mutation
                 'type' =>  Type::nonNull(Type::string()),
                 'rules' => ['required','phone:HU']
             ],
-            'birthOfDate' => [
-                'name' => 'birthOfDate',
+            'dateOfBirth' => [
+                'name' => 'dateOfBirth',
                 'type' =>  Type::nonNull(Type::string()),
                 'rules' => ['required','date_format:Y-m-d','before:today']
             ],

@@ -20,23 +20,15 @@ class PhoneNumberType extends GraphQLType
         return [
             'id' => [
                 'type' => Type::nonNull(Type::int()),
-                'description' => 'Id of a particular user',
+                'description' => 'Id of a particular phone number',
             ],
-            'name' => [
+            'phoneNumber' => [
                 'type' => Type::nonNull(Type::string()),
-                'description' => 'The name of the user',
+                'description' => 'The phone number of the user',
             ],
-            'email' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'The email of the user',
-            ],
-            'dateOfBirth' => [
-                'type' => Type::nonNull(Type::string()),
-                'description' => 'The date of bith of the user',
-            ],
-            'isActive' => [
+            'isDefault' => [
                 'type' => Type::nonNull(Type::boolean()),
-                'description' => 'The active status of the user',
+                'description' => 'The default status of the phone number',
             ]                        
         ];
     }

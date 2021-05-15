@@ -24,52 +24,48 @@ class UpdatePhoneNumberMutation extends Mutation
     public function args(): array
     {
         return [
-            'name' => [
-                'name' => 'name',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required', 'string']
-            ],
-            'email' => [
-                'name' => 'email',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','email']
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int(),
+                'rules' => ['required', 'exists:phone_numbers,id']
             ],
             'phoneNumber' => [
                 'name' => 'phoneNumber',
                 'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','phone:HU']
+                'rules' => ['phone:HU']
             ],
-            'birthOfDate' => [
-                'name' => 'birthOfDate',
-                'type' =>  Type::nonNull(Type::string()),
-                'rules' => ['required','date_format:Y-m-d','before:today']
-            ],
-            'isActive' => [
-                'name' => 'isActive',
+            'isDefault' => [
+                'name' => 'isDefault',
                 'type' =>  Type::nonNull(Type::boolean()),
                 'rules' => ['required']
-            ],
+            ],                 
         ];
     }
 
     public function resolve($root, $args)
     {
+        $phone = PhoneNumber::find($args['id']);
+        if ($args['phoneNumber'] !== null) $phone->phoneNumber = $args['phoneNumber'];
         DB::beginTransaction();
-        if(!$user = User::create($args))
-        {
-            DB::rollBack();
-            throw new Exception('Error in saving data.');
+        if ($args['isDefault'] !== null) {
+            $others = PhoneNumber::where([
+                'user_id' => $phone->user_id,
+                'isDefault' => 1,
+            ]);
+            if ($others->count() != 0) {
+                if (!$others->update(['isDefault' => 0])) {
+                    DB::rollBack();
+                    throw new Exception('Error in saving data.');
+                }
+            }
+            $phone->isDefault = $args['isDefault'];
         }
-        if(!PhoneNumber::create([
-            'user_id' => $user->id, 
-            'phoneNumber' => $args['phoneNumber'],
-            'isDefault' => 1,
-            ]))
-        {
+        if (!$phone->save()) {
             DB::rollBack();
-            throw new Exception('Error in saving data.');
-        }        
+            throw new Exception('Error in saving user data.');
+        }
+
         DB::commit();
-        return $user;
+        return $phone;
     }
 }
