@@ -7,7 +7,7 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class PhoneNumberQuery extends Query
+class PhoneNumbersQuery extends Query
 {
     protected $attributes = [
         'name' => 'phoneNumbers',

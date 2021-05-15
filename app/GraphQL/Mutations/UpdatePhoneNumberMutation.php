@@ -10,7 +10,7 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Illuminate\Support\Facades\DB;
 
-class UpdatePhoneNuberMutation extends Mutation
+class UpdatePhoneNumberMutation extends Mutation
 {
     protected $attributes = [
         'name' => 'updatePhoneNumber'
