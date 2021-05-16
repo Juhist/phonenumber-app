@@ -1,0 +1,495 @@
+{
+	"info": {
+		"_postman_id": "b9819d33-c53f-4028-ba5e-73cb75318ef1",
+		"name": "PhoneNumber",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GraphQL",
+			"item": [
+				{
+					"name": "user(id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  user(id:1){\r\n    id\r\n    name\r\n    email\r\n    dateOfBirth\r\n    isActive\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  users(field:\"id\" sorter:\"DESC\" skip:0 take:2){\r\n    id\r\n    name\r\n    email\r\n    dateOfBirth\r\n    isActive\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "phoneNumbers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  phoneNumbers(field:\"id\" sorter:\"DESC\" skip:0 take:2){\r\n    id\r\n    phoneNumber\r\n    isDefault\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "createPhoneNumber",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createPhoneNumber {\r\n  createPhoneNumber(user_id: 1, phoneNumber: \"+36301236547\", isDefault: true) {\r\n    id\r\n    phoneNumber\r\n    isDefault\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "phoneNumber(id)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "{\r\n  phoneNumber(id:2){\r\n    id\r\n    phoneNumber\r\n    isDefault\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "createUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation createUser {\r\n  createUser(name: \"Teszt Elek\", email: \"tesztelek@test.com\", \r\n    phoneNumber: \"secret\", dateOfBirth: \"2020-01-01\", isActive: true) {\r\n    id\r\n    name\r\n    email\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "updateUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updateUser{\r\n  updateUser(id:2, name: \"Teszt Elek\", email: \"tesztelek@test.com\", \r\n    phoneNumber: \"+36301234567\", dateOfBirth: \"2020-01-01\", isActive: true) {\r\n    id\r\n    name\r\n    email\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "updatePhoneNumber",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation updatePhoneNumber{\r\n  updatePhoneNumber(id:19, phoneNumber: \"+36301234567\",isDefault:false) {\r\n    id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation deleteUser {\r\n  deleteUser(id: 1) {\r\n    id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				},
+				{
+					"name": "deletePhoneNumber",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "mutation deletePhoneNumber {\r\n  deletePhoneNumber(id: 2) {\r\n    id\r\n  }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": "http://127.0.0.1:8000/graphql"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "API",
+			"item": [
+				{
+					"name": "/api/users/",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/phone-numbers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36306780044",
+									"type": "text"
+								},
+								{
+									"key": "isDefault",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/users/phone-numbers"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/phone-numbers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/users/phone-numbers"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/phone-numbers{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Tesztelő",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asdf@sdf.hu",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36306780049",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1987-07-12",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/users/phone-numbers/2?phoneNumber=+36301234569&isDefault=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"users",
+								"phone-numbers",
+								"2"
+							],
+							"query": [
+								{
+									"key": "phoneNumber",
+									"value": "+36301234569"
+								},
+								{
+									"key": "isDefault",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/phone-numbers/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:8000/api/users/phone-numbers/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Tesztelő",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asdf@sdf.hu",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36301234569",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1987-07-12",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/users"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Tesztelő",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asdf@sdf.hu",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36306780049",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1987-07-12",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/users/2"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Tesztelő",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asdf@sdf.hu",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36306780049",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1987-07-12",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/api/users/phone-numbers{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Tesztelő",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "asdf@sdf.hu",
+									"type": "text"
+								},
+								{
+									"key": "phoneNumber",
+									"value": "+36306780049",
+									"type": "text"
+								},
+								{
+									"key": "dateOfBirth",
+									"value": "1987-07-12",
+									"type": "text"
+								},
+								{
+									"key": "isActive",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:8000/api/users/phone-numbers/2"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
